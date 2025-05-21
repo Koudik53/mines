@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title> 💎mine Game - Mines</title>
+  <title>Oju Gaming - Mines</title>
   <style>
     * {
       margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif;
@@ -184,25 +184,20 @@
     </div>
   </div>
 
-<!-- Deposit Page -->
-<div id="deposit" class="page">
-  <div class="transaction-form">
-    <h2 style="text-align: center; margin-bottom: 10px;">👛 Deposit Balance</h2>
-    <p>
-      Maximum deposit ₹1000. For extra deposit, contact on Telegram<br />
-      <a href="https://t.me/kousik_mxp" target="_blank">@kousik_mxp</a>
-    </p>
-    <input type="text" class="form-input" id="cardNumber" placeholder="Your name" />
-    <input type="text" class="form-input" id="expiryDate" placeholder="Phone number" />
-    <input type="number" class="form-input" id="depositAmount" placeholder="Enter Amount ₹" step="0.01" min="1" max="10000" />
-    <button class="form-button green-btn" id="depositBtn">Deposit Now</button>
+  <div id="deposit" class="page">
+    <div class="transaction-form">
+      <h2 style="text-align: center; margin-bottom: 25px;">💳 Deposit Funds</h2>
+      <input type="text" class="form-input" id="cardNumber" placeholder="Your name">
+      <input type="text" class="form-input" id="expiryDate" placeholder="Phone number">
+      <input type="number" class="form-input" id="depositAmount" placeholder="Enter Amount ₹" step="0.01" min="1">
+      <button class="form-button green-btn" onclick="processDeposit()">Deposit Now</button>
+    </div>
   </div>
-</div>
 
   <div id="withdraw" class="page">
     <div class="transaction-form">
-      <h2 style="text-align: center; margin-bottom: 25px;">💸 Withdraw Balance</h2>
-      <button class="form-button red-btn" onclick="window.location.href='https://zenthos.yzz.me/fake-payment/'">Withdraw Now</button>
+      <h2 style="text-align: center; margin-bottom: 25px;">💸 Withdraw Funds</h2>
+      <button class="form-button red-btn" onclick="window.location.href='http://zenthos.yzz.me/fake-payment/'">Withdraw Now</button>
     </div>
   </div>
 
@@ -213,9 +208,6 @@
     let currentBet = 0;
     let minePositions = [];
     let clickedTiles = 0;
-
-    // Deposit flag to allow only 1 deposit
-    let hasDeposited = false;
 
     function initGame() {
       const grid = document.getElementById('gameGrid');
@@ -289,29 +281,11 @@
     }
 
     function processDeposit() {
-      if (hasDeposited) {
-        alert("You can deposit only once with a maximum of ₹1000.");
-        return;
-      }
-
       const amount = parseFloat(document.getElementById('depositAmount').value);
-      if (isNaN(amount) || amount <= 0) {
-        alert("Enter valid deposit amount.");
-        return;
-      }
-      if (amount > 1000) {
-        alert("Maximum deposit limit is ₹1000 only.");
-        return;
-      }
-      if (amount < 1000) {
-        alert("You must deposit exactly ₹1000.");
-        return;
-      }
-
+      if (amount <= 0) return alert("Enter valid deposit amount.");
       balance += amount;
-      hasDeposited = true;
       updateBalance();
-      alert(`Deposited ₹${amount.toFixed(2)}! You cannot deposit again.`);
+      alert(`Deposited ₹${amount.toFixed(2)}!`);
       showPage('game');
     }
 
